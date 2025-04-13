@@ -1,6 +1,8 @@
 require('dotenv').config()
 const express = require('express')
-const dummyRoutes = require('./routes/dummyRoutes')
+const botRoutes = require('./routes/botRoutes')
+const scraperRoutes = require('./routes/scraperRoutes')
+const webAppRoutes = require('./routes/webAppRoutes')
 
 //express app
 const app = express()
@@ -14,7 +16,9 @@ app.use((req, res, next) => {
 })
 
 //routes
-app.use('/api/dummy', dummyRoutes)
+app.use('/api/bot', botRoutes)
+app.use('/api/scraper', scraperRoutes)
+app.use('/api/web', webAppRoutes)
 
 
 //listen for requests

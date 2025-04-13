@@ -1,7 +1,7 @@
 const express = require('express')
-const { getDummy } = require('../controller/dummyController')
+const { getBot } = require('../controller/botController')
 const router = express.Router()
 
-router.get('/', getDummy)
+router.get('/', getBot)
 
 module.exports = router
