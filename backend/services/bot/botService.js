@@ -30,12 +30,13 @@ class BotService {
             const page = await context.newPage();
 
             const formDetector = new FormDetector(page, this.jobUrl);
-            const formFound = await formDetector.isFormFound();
+            const fields = await formDetector.getForm();
+            // const formFound = await formDetector.isFormFound();
 
-            if(!formFound) {
-                console.log('no form found')
-                throw new Error('No form found on this page')
-            }
+            // if(!formFound) {
+            //     console.log('no form found')
+            //     throw new Error('No form found on this page')
+            // }
 
         } catch(error) {
             console.error('Error applying to job:', error)
