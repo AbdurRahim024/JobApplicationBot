@@ -1,6 +1,6 @@
 const { application } = require('express');
 const BotService = require('../services/bot/botService')
-
+const { getSampleJob, getSampleUser } = require('../models/sampleData');
 
 const getBot = async (req,res) => {
     try {
@@ -40,7 +40,9 @@ const apply = async (req,res) => {
         //     application: newApplication
         // })
 
-        const botService = new BotService(jobUrl)
+        const user = getSampleUser()
+        const job = getSampleJob()
+        const botService = new BotService(job, user)
         botService.apply()
         const applicationId = botService.saveApplication()
 

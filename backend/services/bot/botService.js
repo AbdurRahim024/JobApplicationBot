@@ -1,42 +1,26 @@
 const { chromium } = require('playwright');
-const FormDetector = require('./formDetector')
+const getFormFields = require('./formDetector')
 const FormFiller = require('./formFiller')
 
 class BotService {
-    #userData;
+    #user;
     #job;
-    #applicationId
-    #formDetector
-    #formFiller
-    #jobUrl
 
-    // constructor(userData, job) {
-    //     console.log('bot service constructor')
-    //     this.userData = userData
-    //     this.job = job
-    // }
-
-    constructor(jobUrl) {
+    constructor(job, user) {
         console.log('job service constructor 2')
-        this.jobUrl = jobUrl
+        this.#job = job
+        this.#user = user
     }
 
     async apply() {
-        console.log('applying to: ', this.jobUrl)
+        console.log('applying to: ', this.#job.url)
 
         try {
             const browser = await chromium.launch({ headless: false });
             const context = await browser.newContext();
             const page = await context.newPage();
 
-            const formDetector = new FormDetector(page, this.jobUrl);
-            const fields = await formDetector.getForm();
-            // const formFound = await formDetector.isFormFound();
-
-            // if(!formFound) {
-            //     console.log('no form found')
-            //     throw new Error('No form found on this page')
-            // }
+            const fields = await getFormFields(page, this.#job.url)
 
         } catch(error) {
             console.error('Error applying to job:', error)
