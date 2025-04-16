@@ -16,9 +16,9 @@ app.use((req, res, next) => {
 })
 
 //routes
-app.use('/api/bot', botRoutes)
-app.use('/api/scraper', scraperRoutes)
-app.use('/api/web', webAppRoutes)
+app.use('/bot', botRoutes)
+app.use('/scraper', scraperRoutes)
+app.use('/web', webAppRoutes)
 
 
 //listen for requests
